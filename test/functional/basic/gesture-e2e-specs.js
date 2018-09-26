@@ -145,7 +145,7 @@ describe('XCUITestDriver - gestures', function () {
     });
     it('should double tap on an element', async function () {
       // FIXME: Multitouch does not work as expected in Xcode < 9.
-      if ((await xcode.getVersion(true)).major < 9) {
+      if (!process.env.CLOUD && (await xcode.getVersion(true)).major < 9) {
         return this.skip();
       }
 

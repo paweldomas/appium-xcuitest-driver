@@ -185,12 +185,12 @@ describe('XCUITestDriver - basics -', function () {
   describe('logging -', function () {
     describe('types -', function () {
       it('should get the list of available logs', async function () {
-        const expectedTypes = [
-          'syslog', 'crashlog', 'performance', 'server', 'safariConsole'
-        ];
-        if (!process.env.CLOUD) {
-          expectedTypes.push('safariNetwork');
+        if (process.env.CLOUD) {
+          this.skip();
         }
+        const expectedTypes = [
+          'syslog', 'crashlog', 'performance', 'server', 'safariConsole', 'safariNetwork'
+        ];
         const actualTypes = await driver.logTypes();
         actualTypes.should.eql(expectedTypes);
       });

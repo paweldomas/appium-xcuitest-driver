@@ -47,20 +47,21 @@ matrix:
 
 
     # Sauce Emusim tests
+    # TODO: Put this back on Cron job before pull request!!!!
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=0 TEST=functional/basic
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=0 TEST=functional/web
       addons: &sc
         sauce_connect:
           no_ssl_bump_domains: localhost
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=0 TEST=functional/long
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=1 TEST=functional/basic
     - os: linux
       if: type = cron
@@ -68,24 +69,24 @@ matrix:
       addons:
         *sc
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=1 TEST=functional/long
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=2 TEST=functional/basic
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=2 TEST=functional/web
       addons:
         *sc
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=2 TEST=functional/long
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=3 TEST=functional/basic
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=3 TEST=functional/web
       addons:
         *sc
@@ -101,7 +102,7 @@ matrix:
       addons:
         *sc
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=4 TEST=functional/long
 
     # Sauce RDC Tests
@@ -146,7 +147,7 @@ install:
     fi
 script:
   - if [ -n "$CLOUD" ]; then
-      mocha-parallel-tests -t 480000 --require build/test/env/env --recursive build/test/$TEST -g @skip-ci -i --exit;
+      travis_wait 30 mocha-parallel-tests -t 480000 --require build/test/env/env --max-parallel 0 --recursive build/test/$TEST -g @skip-ci -i --exit;
     else
       npm run lint;
       npm run mocha -- -t 480000 $RECURSIVE build/test/$TEST -g @skip-ci -i --exit;

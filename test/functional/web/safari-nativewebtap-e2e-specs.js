@@ -197,6 +197,9 @@ describe('Safari', function () {
   if (process.env.DEVICE_NAME) {
     deviceNames = [process.env.DEVICE_NAME];
   }
+  if (process.env.CLOUD && process.env.CLOUD_DEVICE_NAME) {
+    deviceNames = [process.env.CLOUD_DEVICE_NAME];
+  }
 
   for (const deviceName of deviceNames) {
     runTests(deviceName);

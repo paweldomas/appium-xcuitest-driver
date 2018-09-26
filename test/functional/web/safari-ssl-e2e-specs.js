@@ -2,7 +2,6 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import _ from 'lodash';
 import B from 'bluebird';
-import { killAllSimulators } from '../helpers/simulator';
 import { MOCHA_TIMEOUT, initSession, deleteSession } from '../helpers/session';
 import { doesIncludeCookie, doesNotIncludeCookie,
          newCookie, oldCookie1 } from './safari-cookie-e2e-specs';
@@ -31,12 +30,9 @@ describe('Safari SSL', function () {
 
   let sslServer, driver;
   before(async function () {
-    if (process.env.REAL_DEVICE) {
+    // SSL testing is too slow on CLOUD
+    if (process.env.REAL_DEVICE || process.env.CLOUD) {
       return this.skip();
-    }
-
-    if (!process.env.CLOUD) {
-      await killAllSimulators();
     }
 
     // Create a random pem certificate
