@@ -19,7 +19,7 @@ describe('safari - alerts', function () {
       return this.skip();
     }
     // TODO: why does this fail on Travis? popup happens but button is "send"
-    if (process.env.CI) {
+    if (process.env.CI || process.env.CLOUD) {
       return this.skip();
     }
 

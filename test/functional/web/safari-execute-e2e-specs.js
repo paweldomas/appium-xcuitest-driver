@@ -112,7 +112,9 @@ describe('safari - execute -', function () {
   });
   describe('https', function () {
     before(async function () {
-      await killAllSimulators();
+      if (!process.env.CLOUD) {
+        await killAllSimulators();
+      }
       let caps = _.defaults({
         safariInitialUrl: GUINEA_PIG_PAGE,
         nativeWebTap: true,
@@ -123,7 +125,9 @@ describe('safari - execute -', function () {
     });
     after(async function () {
       await deleteSession();
-      await killAllSimulators();
+      if (!process.env.CLOUD) {
+        await killAllSimulators();
+      }
     });
     runTests(true);
   });
