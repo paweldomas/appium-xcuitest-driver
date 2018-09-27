@@ -276,7 +276,8 @@ describe('XCUITestDriver - gestures', function () {
       action.perform();
 
       // pause a moment so the alert can animate
-      await B.delay(500);
+      const waitDelay = process.env.CLOUD ? 3000 : 500;
+      await B.delay(waitDelay);
 
       let el2 = await driver.elementByAccessibilityId('Okay / Cancel');
       el2.should.exist;
