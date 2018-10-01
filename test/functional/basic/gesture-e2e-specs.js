@@ -264,6 +264,11 @@ describe('XCUITestDriver - gestures', function () {
       driver = await initSession(_.defaults({
         tapWithShortPressDuration: 0.01
       }, UICATALOG_CAPS));
+
+      // TODO: This test needs to be fixed for iPads
+      if (process.env.CLOUD) {
+        this.skip();
+      }
     });
     after(async function () {
       await deleteSession();

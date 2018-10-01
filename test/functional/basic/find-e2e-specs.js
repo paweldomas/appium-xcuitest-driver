@@ -142,7 +142,11 @@ describe('XCUITestDriver - find', function () {
         let begin = Date.now();
         await driver.elementByXPath('//something_not_there')
           .should.eventually.be.rejected;
-        (Date.now() - begin).should.be.above(5000);
+        
+        // Cloud time and Travis/local time aren't always in sync, so be a bit more forgiving
+        let implicitWaitTime = process.env.CLOUD ? 4500 : 5000;
+
+        (Date.now() - begin).should.be.above(implicitWaitTime);
       });
       it.skip('should return the last button', async function () {
         let el = await driver.elementByXPath('//XCUIElementTypeButton[last()]');

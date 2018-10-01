@@ -17,6 +17,11 @@ describe('XCUITestDriver - screenshots - mjpeg server', function () {
   let driver, mjpegServer;
 
   before(async function () {
+    // Can't run a local MJPEG server in the cloud
+    if (process.env.CLOUD) {
+      this.skip();
+    }
+
     mjpegServer = mjpeg.initMJpegServer(MJPEG_SERVER_PORT);
     driver = await initSession({
       ...UICATALOG_CAPS,
