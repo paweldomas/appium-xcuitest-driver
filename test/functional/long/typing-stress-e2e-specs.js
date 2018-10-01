@@ -16,6 +16,7 @@ describe('XCUITestDriver - long tests', function () {
   let driver;
   before(async function () {
     let caps = Object.assign({}, UICATALOG_CAPS, {maxTypingFrequency: 20});
+    delete UICATALOG_CAPS['appium-version']; // TODO: DO NOT COMMIT THIS!~!!
     driver = await initSession(caps);
   });
   after(async function () {

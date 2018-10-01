@@ -32,7 +32,7 @@ if (!process.env.CLOUD) {
 
     let sslServer, driver;
     before(async function () {
-      if (process.env.REAL_DEVICE) {
+      if (process.env.REAL_DEVICE || process.env.CLOUD) {
         return this.skip();
       }
 

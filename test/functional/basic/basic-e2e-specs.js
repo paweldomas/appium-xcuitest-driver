@@ -8,12 +8,11 @@ import { initSession, deleteSession, MOCHA_TIMEOUT } from '../helpers/session';
 import { GUINEA_PIG_PAGE } from '../web/helpers';
 import { PNG } from 'pngjs';
 
-
 chai.should();
 chai.use(chaiAsPromised);
 chai.use(chaiSubset);
 
-describe('XCUITestDriver - basics -', function () {
+describe.only('XCUITestDriver - basics -', function () {
   this.timeout(MOCHA_TIMEOUT);
 
   let driver;
@@ -184,7 +183,7 @@ describe('XCUITestDriver - basics -', function () {
 
   describe('logging -', function () {
     describe('types -', function () {
-      it('should get the list of available logs', async function () {
+      it.only('should get the list of available logs', async function () {
         if (process.env.CLOUD) {
           this.skip();
         }
