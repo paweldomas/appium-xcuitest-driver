@@ -91,13 +91,13 @@ matrix:
       addons:
         *sc
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=3 TEST=functional/long
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=4 TEST=functional/basic
     - os: linux
-      if: type = cron
+      if: type != cron
       env: CLOUD=1 SAUCE_EMUSIM_DEVICE_INDEX=4 TEST=functional/web
       addons:
         *sc
